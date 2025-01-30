@@ -58,6 +58,10 @@ describe('OTP Verification', () => {
   it('should navigate backward with backspace', () => {
     cy.visit(baseUrl + '/main.html');
 
+    // Ensure the first input field is focused before typing
+    cy.get(".code").eq(0).focus();
+    cy.focused().should("have.id", "code-1");
+
     // Typing values in the OTP fields
     cy.get(".code").eq(0).type(5);
     cy.get(".code").eq(1).type(1);
