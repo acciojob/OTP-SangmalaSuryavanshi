@@ -2,10 +2,10 @@
 document.querySelectorAll('.code').forEach((input, index, inputs) => {
   input.addEventListener('input', (e) => {
     const currentInput = e.target;
-    const nextInput = inputs[index + 1];
+    const nextInput = currentInput.nextElementSibling; // Get the next sibling input
 
-    // Move to next input after typing a number
-    if (currentInput.value.length === 1 && nextInput) {
+    // Move focus to next input after typing a number
+    if (currentInput.value.length === 1 && nextInput && nextInput.classList.contains('code')) {
       nextInput.focus();
     }
   });
@@ -13,13 +13,11 @@ document.querySelectorAll('.code').forEach((input, index, inputs) => {
   input.addEventListener('keydown', (e) => {
     // Handle backspace key
     if (e.key === 'Backspace' && !input.value) {
-      const prevInput = inputs[index - 1];
-      if (prevInput) {
+      const prevInput = input.previousElementSibling; // Get the previous sibling input
+      if (prevInput && prevInput.classList.contains('code')) {
         prevInput.focus();
       }
     }
   });
 });
-
-
 
